@@ -1,59 +1,76 @@
 
 
-document.getElementById('CalculatorBtn').addEventListener("click",calculate);
+const addbtn = document.querySelector("#addbtn");
+const main = document.querySelector("#main");
+// const addbtn = document.querySelector("#addbtn");
 
-function calculate(){
-    const loanAMount = parseFloat(document.getElementById('loan-amount').value);
-    const INterstRate = parseFloat(document.getElementById('interest_Rate').value);
-    const LoanTerm = parseFloat(document.getElementById('loan-term').value);
+addbtn.addEventListener("click", addnote);
 
-    if(isNaN(loanAMount) || isNaN(INterstRate) || isNaN(LoanTerm)){
-        alert("Please enter valid numbers");
-    }
+function addnote(){
 
-    const monthlyInterest = INterstRate /100 / 12;
-    const totalPayments = LoanTerm;
-    const monthlyPayment = (loanAMount*monthlyInterest)/(1-Math.pow(1+monthlyInterest, -totalPayments));
-
-    const totalInterestPaid = (monthlyPayment * totalPayments) - loanAMount;
-
-    displayResult(monthlyPayment,totalInterestPaid);
-
-}
-
-function displayResult(monthlyPayment,totalInterestPaid){
-
-    const resultDiv = document.getElementById('result');
-
-    resultDiv.innerHTML = `
-
-            <p><strong> Montly Payment : ${monthlyPayment.toFixed(2)}</strong></p>
-            <p><strong> Montly Payment : ${totalInterestPaid.toFixed(2)}</strong></p>
+    const note = document.createElement("div");
+    note.classList.add("note");
+    note.innerHTML = `
+    <div class="tool">
+                <i class="save fas fa-save"></i>
+                <i class="trash fas fa-trash"></i>
+            </div>
+    <textarea></textarea>
     `;
+
+    const trashIcon = note.querySelector(".trash");
+    const saveIcon = note.querySelector(".save");
+    const textarea = note.querySelector("textarea");
+
+    trashIcon.addEventListener("click",()=>{
+
+        note.remove();
+        savenote();
+    });
+    saveIcon.addEventListener("click",savenote);
+    textarea.addEventListener("input",savenote);
+
+    main.appendChild(note);
 }
 
 
+function savenote(){
+
+    const notes = document.querySelectorAll(".note textarea");
+    const data= [];
+
+    for(let i=0;i<notes.length;i++){
+        data.push(notes[i].value);
+    }
+    if(data.length===0){
+        localStorage.removeItem("notes");
+    }
+    else{
+        localStorage.setItem("notes",JSON.stringify(data));
+    }
+}
 
 
+function loadnote(){
+
+    const lessnotes = JSON.parse(localStorage.getItem("notes"));
+
+    if(lessnotes !== null){
+        lessnotes.forEach(notetext => {
+            addnote();
+
+            const notes = document.querySelectorAll(".note textarea");
+            const lastnote = notes[notes.length -1];
+            lastnote.value = notetext;
+        });
+    }
+    else{
+        addnote();
+    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+loadnote();
 
 
 

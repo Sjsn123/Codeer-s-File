@@ -1,62 +1,89 @@
 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: white;
-
+    background: linear-gradient(to right, rgb(242,123,89),rgb(200,212,076));
 }
 
-.container{
-    max-width: 500px;
-    margin:  100px;
+#main{
+    min-height: 100vh;
+    padding-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-h2{
-    text-align: center;
-    text-decoration:underline ;
-}
-
-.calculator{
-    background-color: whitesmoke;
-    border-radius: 8px;
-    border: 1px solid wheat;
-    padding:10px 40px ;
-}
-
-.input-group{
-    margin-bottom: 15px;
-
-}
-
-.input-group label{
-    display: block;
-    margin-bottom: 5px;
-}
-
-.input-group input{
-    width: 100%;
-    padding: 8px;
-    border: 1px solid wheat;
-    border-radius: 8px;
-}
-
-button{
-    display: block;
-    margin: 0 auto;
+#addbtn{
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    background-color: green;
+    border:0;
     padding: 10px 20px;
-    border: none;
+    color: aliceblue;
+    outline: none;
     border-radius: 5px;
-    color: white;
-    background-color: rgb(79, 218, 61);
     cursor: pointer;
+    transition: background-color 0.5s ease;
 }
 
-#result{
-    margin-top: 20px;
+#addbtn:hover{
+    background-color: rgb(123, 171, 74);
+}
+
+.note{
+    background: transparent;
+    margin: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tool{
+    background-color: rgb(26, 19, 19);
+    color: rgb(214, 217, 219);
+    padding: 5px;
+    display: flex;
+    justify-content: right;
+}
+
+
+.tool i{
+    padding: 5px;
+    cursor: pointer;
+    transition: color 0.5s ease;
+   
+}
+
+.tool i:hover{
+    color: rosybrown;
+}
+
+.note textarea{
+    width: 300px;
+    border: none;
+    border-radius: 0px 0px 10px 10px;
+    min-height: 220px;
+    resize: none;
     padding: 10px;
-    background-color: wheat;
-    border: 1px solid white;
-    border-radius: 4px;
-    
+    overflow: hidden;
+    font-size: 16px;
+    color: aliceblue;
+    background-color: bisque;
+    transition: background-color 0.5s ease;
+}
+
+.note textarea:hover{
+    background-color: rgb(105, 173, 173);
+}
+
+.note textarea:focus{
+    outline: none;
 }
 
 
